@@ -11,8 +11,6 @@ public class App {
         // Start the password Manager
         Scanner scanner = new Scanner(System.in);
         out.println("Welcome to the Password Manager!");
-        out.print("Please enter a key to use: ");
-        String key = scanner.nextLine();
 
         PasswordManager passwordManager = new PasswordManager(true);
 
@@ -71,11 +69,13 @@ public class App {
                     break;
                 case 4:
                     out.print("Enter a key for the encryption (Like a password for passwords): ");
-                    key = scanner.nextLine();
+                    String key = scanner.nextLine();
                     passwordManager.encrypt(key, EncryptionType.XOR);
                     out.println("All passwords encrypted!");
                     break;
                 case 5:
+                    out.println("Enter a key for the decryption");
+                    String key = scanner.nextLine();
                     passwordManager.decrypt(key, EncryptionType.XOR);
                     out.println("All passwords decrypted!");
                     break;
