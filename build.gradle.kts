@@ -18,3 +18,8 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+// Specify the main class for the application
+application {
+    mainClass.set("com.kadenfrisk.App")
+}

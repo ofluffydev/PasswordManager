@@ -23,6 +23,7 @@ public class PasswordManager {
 
     public PasswordManager(boolean checkPasswordSecurity) {
         // Choose whether to check the security
+        this();
         this.checkPasswordSecurity = checkPasswordSecurity;
     }
 
@@ -31,8 +32,19 @@ public class PasswordManager {
         this.passwords.addAll(passwords);
     }
 
-    public void addPassword(String username, String password) {
-        passwords.add(new Password(username, password));
+    public boolean addPassword(String username, String passwordString) {
+        if (checkPasswordSecurity) {
+            Password password = new Password(username, passwordString);
+            if (!password.isStrong()) {
+                return false;
+            }
+            else {
+                passwords.add(new Password(username, passwordString));
+                return true;
+            }
+        } else
+            passwords.add(new Password(username, passwordString));
+        return true;
     }
 
     public void setCheckPasswordSecurity(boolean b) {
@@ -52,5 +64,16 @@ public class PasswordManager {
         for (Password password : passwords) {
             password.setPassword(EncryptionManager.encrypt(password.getPassword(), key, encryptionType));
         }
+    }
+
+    public void decrypt(String key, EncryptionType encryptionType) {
+        // Decrypt all the passwords
+        for (Password password : passwords) {
+            password.setPassword(EncryptionManager.decrypt(password.getPassword(), key, encryptionType));
+        }
+    }
+
+    public boolean isCheckPasswordSecurity() {
+        return checkPasswordSecurity;
     }
 }

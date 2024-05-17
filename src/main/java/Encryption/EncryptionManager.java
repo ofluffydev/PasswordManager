@@ -17,6 +17,21 @@ public class EncryptionManager {
         }
     }
 
+    public static String decrypt(String password, String key, EncryptionType encryptionType) {
+        switch (encryptionType) {
+//            case AES:
+//                return AESEncryption.decrypt(password, key);
+//            case DES:
+//                return DESEncryption.decrypt(password, key);
+//            case RSA:
+//                return RSAEncryption.decrypt(password, key);
+            case XOR:
+                return XOREncryption.decrypt(password, key);
+            default:
+                return null;
+        }
+    }
+
     // Enum for the different types of encryption
     public enum EncryptionType {
         AES,
