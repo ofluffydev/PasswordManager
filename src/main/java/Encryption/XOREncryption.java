@@ -27,14 +27,18 @@ public class XOREncryption {
             // Set the key to the new key
             keyChars = newKey;
         }
+        Bytes b = new Bytes(passwordChars, keyChars);
 
         // Now, once that's finally done, finally we can encrypt the password using xor
-        for (int i = 0; i < passwordChars.length; i++) {
-            passwordChars[i] = (byte) (passwordChars[i] ^ keyChars[i]);
+        for (int i = 0; i < b.passwordChars().length; i++) {
+            b.passwordChars()[i] = (byte) (b.passwordChars()[i] ^ b.keyChars()[i]);
         }
 
         // Return the encrypted password
-        return new String(passwordChars);
+        return new String(b.passwordChars());
+    }
+
+    private record Bytes(byte[] passwordChars, byte[] keyChars) {
     }
 
     public static String encrypt(Password password, String key) {

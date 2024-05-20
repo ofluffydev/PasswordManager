@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.kadenfrisk"
-version = "1.0-SNAPSHOT"
+version = "1.0"
 
 repositories {
     mavenCentral()
@@ -21,5 +21,12 @@ tasks.test {
 
 // Specify the main class for the application
 application {
-    mainClass.set("com.kadenfrisk.App")
+    mainClass.set("App")
+}
+
+// Main manifest attributes for the jar file
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "App"
+    }
 }
